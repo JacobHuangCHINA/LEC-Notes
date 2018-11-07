@@ -1,0 +1,22 @@
+SHOW DATABASES;
+DROP DATABASE IF EXISTS yhuan385assign2db;
+CREATE DATABASE yhuan385assign2db;
+USE yhuan385assign2db;
+
+GRANT USAGE ON *.* TO 'ta'@'localhost';
+DROP USER 'ta'@'localhost';
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319';
+GRANT ALL PRIVILEGES ON yourwesternuseridassign2db.* TO 'ta'@'localhost';
+FLUSH PRIVILEGES;
+
+SHOW tables;
+
+CREATE TABLE Agents (AgentID int not null, FirstName VARCHAR(30), LastName VARCHAR(30), City VARCHAR(15), Commission int, PRIMARY KEY (AgentID));
+
+CREATE TABLE Customers (CustomerID int not null, FirstName VARCHAR(30), LastName VARCHAR(30), City VARCHAR(15), PhoneNum VARCHAR(8), PRIMARY KEY (CustomerID),AgentID int,FOREIGN KEY (AgentID) REFERENCES Agents(AgentID) ON DELETE RESTRICT);
+
+CREATE TABLE Products (ProductID int not null, Description VARCHAR(20), Cost FLOAT, Quantity int,PRIMARY KEY (ProductID));
+
+CREATE TABLE Purchase (CustomerID int not null, ProductID int not null,Quantity int, PRIMARY KEY (CustomerID, ProductID), FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID), FOREIGN KEY (ProductID) REFERENCES Products(ProductID));
+
+SHOW tables;

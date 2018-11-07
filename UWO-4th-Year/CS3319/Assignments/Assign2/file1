@@ -1,0 +1,19 @@
+SHOW DATABASES;
+CREATE DATABASE yhuan385assign2db;
+USE yhuan385assign2db;
+
+GRANT USAGE ON *.* TO 'ta'@'localhost';
+DROP USER 'ta'@'localhost';
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319';
+GRANT ALL PRIVILEGES ON yourwesternuseridassign2db.* TO 'ta'@'localhost';
+FLUSH PRIVILEGES;
+
+SHOW tables;
+
+CREATE TABLE Agent (AgentID CHAR(2), FirstName VARCHAR(30), LastName VARCHAR(30), City VARCHAR(15), Commission VARCHAR(3), PRIMARY KEY (AgentID));
+
+CREATE TABLE Customer (CustomerID CHAR(2), firstname VARCHAR(30), lastname VARCHAR(30), city VARCHAR(15), phoneNum VARCHAR(8), PRIMARY KEY (CustomerID) FOREIGN KEY (AgentID) REFERENCES Agent(AgentID));
+
+CREATE TABLE Product (ProductID CHAR(2), description VARCHAR(20), Cost VARCHAR(6), City VARCHAR(15), Commission VARCHAR(2), PRIMARY KEY (AgentID));
+
+SHOW tables;

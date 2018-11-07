@@ -1,0 +1,45 @@
+USE yhuan385assign2db;
+-- Query1
+SELECT description FROM Products;
+
+-- Query2
+SELECT DISTINCT City FROM Customers;
+
+-- Query3
+SELECT * FROM Agents ORDER BY City;
+
+-- Query4
+SELECT FirstName, LastName FROM Customers WHERE City = "Springfield";
+
+-- Query5
+SELECT LastName FROM Customers WHERE AgentID = 11;
+
+-- Query6
+SELECT Description FROM Products WHERE Description LIKE '%Pad%' OR Description LIKE '%pad';
+
+-- Query7
+SELECT LastName,Quantity FROM Customers,Purchase WHERE Customers.CustomerID = Purchase.CustomerID;
+
+-- Query8
+SELECT Quantity AS "Homer's Total Purchases" FROM Purchase WHERE CustomerID=(SELECT CustomerID FROM Customers WHERE FirstName='Homer');
+
+-- Query9
+SELECT FirstName, LastName, Quantity FROM Customers,Purchase WHERE (Customers.CustomerID = Purchase.CustomerID);
+
+-- Query10
+SELECT Description,Products.Quantity FROM Products,Purchase WHERE NOT Products.ProductID = Purchase.ProductID;
+
+-- Query11
+SELECT Description,Quantity FROM Products WHERE ProductID NOT IN (SELECT Purchase.ProductID FROM Purchase, Customers WHERE Purchase.CustomerID = Customers.CustomerID AND Customers.FirstName = 'Fred' AND LastName = 'Flintstone');
+
+-- Query12
+SELECT Customers.FirstName, Customers.LastName, Agents.FirstName , Agents.LastName FROM Customers, Agents WHERE Customers.City = Agents.City;
+
+-- Query13
+SELECT SUM(Quantity) AS "Knee Pads Total Purchase" FROM Purchase WHERE ProductID = 78;
+
+-- Query14
+SELECT Description FROM Products WHERE ProductID=(SELECT ProductID FROM Purchase GROUP By ProductID HAVING COUNT(ProductID) > 3);
+
+-- Query15
+SELECT FirstName, LastName FROM Agents WHERE AgentID IN (SELECT AgentID FROM Customers WHERE CustomerID IN (SELECT CustomerID FROM Purchase WHERE ProductID = 78));

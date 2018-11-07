@@ -1,0 +1,26 @@
+-- SHOW tables
+SELECT * FROM Agents;
+SELECT * FROM Customers;
+SELECT * FROM Products;
+SELECT * FROM Purchase;
+
+-- create Views
+CREATE VIEW Customer_View AS
+SELECT Customers.FirstName, Customers.LastName, Products.Description, Products.Quantity, Products.Cost, Products.Quantity*Products.Cost AS TotalCost FROM Customers,Products,Purchase WHERE Purchase.ProductID = Products.ProductID AND Customers.CustomerID = Purchase.CustomerID ORDER BY Customers.LastName;
+
+--show views
+SELECT * FROM Customer_View
+
+--show spent more than 100
+SELECT * FROM Customer_View WHERE TotalCost > 100;
+
+--delet product
+DELETE FROM Products WHERE Description = 'apple';
+
+-- prove delete works
+SELECT * FROM Products;
+
+-- delete agent from springfield
+DELETE FROM Agents WHERE City = 'Springfield';
+-- the row where agent called hugh Grant on delete restrict is set to cutomers. as agent id is a foreigh key for the cusotmers table. so it can't delet.
+

@@ -1,0 +1,63 @@
+USE yhuan385assign2db;
+
+LOAD DATA LOCAL INFILE'loaddatafall2018.txt' INTO TABLE Products FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n';
+
+-- inset item to Products table
+
+INSERT INTO Products values(66,"Elbow pads",14.25,120);
+INSERT INTO Products values(10,"apple",12,110);
+INSERT INTO Products values(7,"banana",12,80);
+
+-- inset item to Agents table
+
+INSERT INTO Agents values(99, "Hugh", "Grant", "Springfield", 16);
+INSERT INTO Agents values(22, "Courtney", "Cox", "New York", 25);
+INSERT INTO Agents values(66, "Rosie" ,"ODonnell", "Ottawa", 100);
+INSERT INTO Agents values(33, "David", "Letterman", "Bedrock", 100);
+INSERT INTO Agents values(11, "Regis" ,"Philbin", "Boston", 33);
+INSERT INTO Agents values(12, "Rosie","Cox", "Ottawa", 50);
+INSERT INTO Agents values(55, "Yangzhe","Huang", "Changsha", 89);
+
+-- inset item to Customers table
+
+INSERT INTO Customers values(21, "Homer", "Simpson", "Springfield","686-8956",99);
+INSERT INTO Customers values(31, "Sideshow", "Bob", "Springfield", "686-5555",66);
+INSERT INTO Customers values(12, "Monty", "Burns", "Springfield", "789-0000",99);
+INSERT INTO Customers values(15, "Fred", "Flintstone", "Bedrock", "777-2345",11);
+INSERT INTO Customers values(13, "Super","Man", "Kypto", "888-1234",33);
+INSERT INTO Customers values(10, "Barney", "Rubble", "Bedrock", "777-1234",11);
+INSERT INTO Customers values(14, "Peter","Griffens", "Providence", "987-4567",99);
+
+-- inset item to Purchase table
+
+INSERT INTO Purchase values(21,99,20);
+INSERT INTO Purchase values(21,12,14);
+INSERT INTO Purchase values(21,66,10);
+INSERT INTO Purchase values(31,99,1);
+INSERT INTO Purchase values(31,12,2);
+INSERT INTO Purchase values(31,78,4);
+INSERT INTO Purchase values(31,66,2);
+INSERT INTO Purchase values(15,66,2);
+INSERT INTO Purchase values(15,78,2);
+INSERT INTO Purchase values(14,66,19);
+
+-- show data in tables
+SELECT * FROM Agents;
+SELECT * FROM Products;
+SELECT * FROM Customers;
+SELECT * FROM Purchase;
+
+-- change items
+UPDATE Customers SET FirstName = 'Wonder', LastName='woman' WHERE FirstName = 'Super' AND LastName = 'Man';
+UPDATE Purchase SET Quantity = 5 WHERE CustomerID=(SELECT CustomerID FROM Customers WHERE FirstName = 'Sideshow');
+UPDATE Customers SET City = 'Boston' WHERE AgentID=(SELECT AgentID FROM Agents WHERE FirstName = 'Regis');
+
+
+
+
+
+
+
+
+
+
